@@ -12,9 +12,18 @@ const hbs = create({
 
 app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
+
+//views config for handlebars
 app.set('views', path.join(__dirname, 'src', 'views'));
 
+//static config
 app.use(express.static(path.join(__dirname, 'src', 'assets')));
+
+//local variables
+app.use((req, res, next) => {
+    res.locals.ejemplo_local = 'mi muñeca me habló';
+    next();
+});
 
 
 app.use("/", require('./src/routes/routes'));
